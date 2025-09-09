@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -18,6 +18,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import * as React from "react";
+import { formatNumber } from "@/lib/format";
 
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -59,7 +60,8 @@ export function BarChartComponent() {
               tickMargin={10}
               tickFormatter={(value) => value.slice(0, 3)}
             />
-            <ChartTooltip content={<ChartTooltipContent />} />
+            <YAxis tickFormatter={(v) => formatNumber(v)} />
+            <ChartTooltip formatter={(v) => formatNumber(Number(v))} content={<ChartTooltipContent />} />
             <ChartLegend content={<ChartLegendContent />} />
             <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
             <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -18,6 +18,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { formatNumber } from "@/lib/format";
 import {
   Select,
   SelectContent,
@@ -226,10 +227,12 @@ export function AreaChartComponent() {
                 });
               }}
             />
+            <YAxis tickFormatter={(v) => formatNumber(v)} />
             <ChartTooltip
               cursor={false}
               content={
                 <ChartTooltipContent
+                  formatter={(v) => formatNumber(Number(v))}
                   labelFormatter={(value) => {
                     return new Date(value).toLocaleDateString("en-US", {
                       month: "short",
