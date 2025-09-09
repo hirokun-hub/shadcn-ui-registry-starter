@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import NumberText from "@/components/number-text";
 import * as RechartsPrimitive from "recharts";
 
 import { cn } from "@/lib/utils";
