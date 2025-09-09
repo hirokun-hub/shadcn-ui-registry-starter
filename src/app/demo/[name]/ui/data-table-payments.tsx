@@ -17,6 +17,7 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { formatCurrencyJPY } from "@/lib/format";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -125,15 +126,13 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "amount",
     header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue("amount"));
+      const amount = row.getValue<number>("amount") ?? null;
 
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+      return (
+        <div className="text-right font-medium">
+          {formatCurrencyJPY(amount)}
+        </div>
+      );
     },
   },
   {

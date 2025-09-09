@@ -8,6 +8,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatCurrencyJPY } from "@/lib/format";
+
+const toNumberFromCurrency = (
+  raw: string | number | null | undefined,
+): number | null => {
+  if (typeof raw === "number") return raw;
+  if (typeof raw === "string") {
+    const n = parseFloat(raw.replace(/[^0-9.-]+/g, ""));
+    return Number.isFinite(n) ? n : null;
+  }
+  return null;
+};
 
 const invoices = [
   {
@@ -75,7 +87,7 @@ export const table = {
               <TableCell>{invoice.paymentStatus}</TableCell>
               <TableCell>{invoice.paymentMethod}</TableCell>
               <TableCell className="text-right">
-                {invoice.totalAmount}
+                {formatCurrencyJPY(toNumberFromCurrency(invoice.totalAmount))}
               </TableCell>
             </TableRow>
           ))}
@@ -83,7 +95,7 @@ export const table = {
         <TableFooter>
           <TableRow>
             <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
+            <TableCell className="text-right">{formatCurrencyJPY(2500)}</TableCell>
           </TableRow>
         </TableFooter>
       </Table>

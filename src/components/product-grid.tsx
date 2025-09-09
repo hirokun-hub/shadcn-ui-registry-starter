@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { Product } from "@/lib/products";
+import { formatCurrencyJPY } from "@/lib/format";
 
 export default function ProductGrid({
   categories,
@@ -58,7 +59,7 @@ export default function ProductGrid({
             </CardContent>
 
             <CardFooter className="flex items-center justify-between p-4 pt-0">
-              <div className="font-semibold">${product.price.toFixed(2)}</div>
+              <div className="font-semibold">{formatCurrencyJPY(product.price)}</div>
               <Button size="sm">
                 <ShoppingCart className="mr-2 size-4" /> Add
               </Button>
