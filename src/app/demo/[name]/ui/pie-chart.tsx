@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import NumberText from "@/components/number-text";
 import {
   type ChartConfig,
   ChartContainer,
@@ -95,7 +96,7 @@ export function PieChartComponent() {
                           y={viewBox.cy}
                           className="fill-foreground font-bold text-3xl"
                         >
-                          {totalVisitors.toLocaleString()}
+                          <NumberText value={totalVisitors} kind="number" as="text" />
                         </tspan>
                         <tspan
                           x={viewBox.cx}
